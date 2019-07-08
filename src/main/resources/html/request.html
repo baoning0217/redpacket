@@ -3,14 +3,14 @@
 <head>
     <meta charset="utf-8" http-equiv="content-type" content="text/html" />
     <title>参数</title>
-    <script type="application/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="application/javascript" src="http://code.jquery.com/jquery-3.2.0.js"></script>
     <script type="application/javascript">
         $(document).ready(function () {
-            var max = 30000;
-            var redPacketId = 8;
+            var max = 3;
+            var redPacketId = 9;
             for(var i = 1; i <= max; i++){
                 $.post({
-                    url:"http://127.0.0.1:8090/admin/userRedPacket/grab?redPacketId="+redPacketId+"&userId=" + i,
+                    url:"http://127.0.0.1:8090/admin/userRedPacket/grabForRedis?redPacketId="+redPacketId+"&userId=" + i,
                     success: function(result){
                     }
                 });

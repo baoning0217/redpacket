@@ -29,5 +29,18 @@ public class UserRedPacketController {
         return result;
     }
 
+    /**
+     * Redis抢购
+     * @param redPacketId
+     * @param userId
+     * @return
+     */
+    @PostMapping("/grabForRedis")
+    public long grabRedPacketForRedis(Long redPacketId, Long userId){
+        long result = userRedPacketService.grapRedPacketByRedis(redPacketId, userId);
+        System.err.println("返回值:" + result +",红包id:" + redPacketId + ",抢购用户id:"+ userId);
+        return result;
+    }
+
 
 }

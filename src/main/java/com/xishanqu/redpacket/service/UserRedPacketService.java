@@ -5,10 +5,12 @@ import com.xishanqu.redpacket.mapper.UserRedPacketMapper;
 import com.xishanqu.redpacket.pojo.RedPacket;
 import com.xishanqu.redpacket.pojo.UserRedPacket;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import redis.clients.jedis.Jedis;
 
 /**
  * @Author BaoNing 2019/7/2
@@ -20,6 +22,10 @@ public class UserRedPacketService {
     private UserRedPacketMapper userRedPacketMapper;
     @Autowired
     private RedPacketMapper redPacketMapper;
+    @Autowired
+    private RedisRedPacketService redisRedPacketService;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     private static final int FAILED = 0;
 
@@ -67,6 +73,53 @@ public class UserRedPacketService {
                 return FAILED;
             }
         }
+    }
+
+
+    // Lua脚本
+    String script = "local listKey = 'red_packet_list_'..KEYS[1] \n"
+            + "local redPacket = 'red_packet_'..KEYS[1] \n"
+            + "local stock = tonumber(redis.call('hget', redPacket, 'stock')) \n"
+            + "if stock <= 0 then return 0 end \n"
+            + "stock = stock -1 \n"
+            + "redis.call('hset', redPacket, 'stock', tostring(stock)) \n"
+            + "redis.call('rpush', listKey, ARGV[1]) \n"
+            + "if stock == 0 then return 2 end \n"
+            + "return 1 \n";
+
+    // 在缓存LUA脚本后，使用该变量保存Redis返回的32位的SHA1编码，使用它去执行缓存的LUA脚本[加入这句话]
+    String sha1 = null;
+
+    public Long grapRedPacketByRedis(Long redPacketId, Long userId) {
+        // 当前抢红包用户和日期信息
+        String args = userId + "-" + System.currentTimeMillis();
+        Long result = null;
+        // 获取底层Redis操作对象
+        Jedis jedis = (Jedis) redisTemplate.getConnectionFactory().getConnection().getNativeConnection();
+        try {
+            // 如果脚本没有加载过，那么进行加载，这样就会返回一个sha1编码
+            if (sha1 == null) {
+                sha1 = jedis.scriptLoad(script);
+            }
+            // 执行脚本，返回结果
+            Object res = jedis.evalsha(sha1, 1, redPacketId + "", args);
+            result = (Long) res;
+            // 返回2时为最后一个红包，此时将抢红包信息通过异步保存到数据库中
+            if (result == 2) {
+                // 获取单个小红包金额
+                String unitAmountStr = jedis.hget("red_packet_" + redPacketId, "unit_amount");
+                // 触发保存数据库操作
+                Double unitAmount = Double.parseDouble(unitAmountStr);
+                System.err.println("thread_name = " + Thread.currentThread().getName());
+                redisRedPacketService.saveUserRedPackByRedis(redPacketId, unitAmount);
+            }
+        } finally {
+            // 确保jedis顺利关闭
+            if (jedis != null && jedis.isConnected()) {
+                jedis.close();
+            }
+        }
+        return result;
     }
 
 
