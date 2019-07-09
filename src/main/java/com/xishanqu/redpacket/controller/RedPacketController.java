@@ -25,7 +25,8 @@ public class RedPacketController {
     @RequestMapping("/create")
     public int insertRedPacket(@RequestBody RedPacket redPacket){
 
-        redPacket.setNote("2019-07-03");
+        redPacket.setNote("2019-07-09");
+        redPacket.setVersion(0);
 
         //总金额
         Double amount = redPacket.getAmount();
@@ -38,7 +39,7 @@ public class RedPacketController {
         Double unitAmount =  amount/total;
         redPacket.setUnitAmount(unitAmount);
 
-        int result = redPacketService.insertRedPacket(redPacket);
+        int result = redPacketService.addRedPacket(redPacket);
         return result;
     }
 

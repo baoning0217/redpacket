@@ -28,6 +28,12 @@ public interface RedPacketMapper {
      */
     int insertRedPacket(RedPacket redPacket);
 
+    /**
+     * 添加红包
+     * @param redPacket
+     * @return
+     */
+    int addRedPacket(RedPacket redPacket);
 
     /**
      * 悲观锁

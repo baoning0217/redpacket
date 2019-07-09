@@ -28,6 +28,12 @@
   </update>
 
 
+  <insert id="addRedPacket" useGeneratedKeys="true" keyProperty="id" parameterType="com.xishanqu.redpacket.pojo.RedPacket">
+    insert into t_red_packet(user_id, amount, total, unit_amount, stock, version, note)
+      values (#{userId}, #{amount}, #{total}, #{unitAmount}, #{stock}, #{version}, #{note})
+  </insert>
+
+
   <insert id="insertRedPacket" keyColumn="id" keyProperty="id" parameterType="com.xishanqu.redpacket.pojo.RedPacket" useGeneratedKeys="true">
     insert into t_red_packet
     <trim prefix="(" suffix=")" suffixOverrides=",">
