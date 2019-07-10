@@ -23,6 +23,18 @@ import java.util.concurrent.Executor;
 @EnableWebMvc
 public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigurer {
 
+
+//    /**
+//     * 配置静态资源策略
+//     * @param registry
+//     */
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/static/**")
+//                .addResourceLocations("classpath:/static/");
+//    }
+
+
     @Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
@@ -41,7 +53,6 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
-
         List<MediaType> supportedMediaTypes = new ArrayList<>();
         supportedMediaTypes.add(MediaType.APPLICATION_JSON);
         supportedMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
@@ -61,7 +72,6 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
         supportedMediaTypes.add(MediaType.TEXT_PLAIN);
         supportedMediaTypes.add(MediaType.TEXT_XML);
         converter.setSupportedMediaTypes(supportedMediaTypes);
-
         FastJsonConfig config = new FastJsonConfig();
         config.setDateFormat("yyyy-MM-dd");
         config.setCharset(Charset.forName("UTF-8"));

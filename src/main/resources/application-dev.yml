@@ -32,6 +32,20 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
         session.timeout.ms: 15000
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      max-request-size: 10MB
+      resolve-lazily: false
+      file-size-threshold: 0
+      location: C:\\temp
+
+  mvc:
+    static-path-pattern: /statis/**
+  resources:
+    static-locations: classpath:/static/
+
 
 # 配置kafka-topic
 kafka:
