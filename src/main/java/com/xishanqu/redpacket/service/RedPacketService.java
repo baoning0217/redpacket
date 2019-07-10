@@ -1,7 +1,6 @@
 package com.xishanqu.redpacket.service;
 
 import com.alibaba.fastjson.JSON;
-import com.xishanqu.redpacket.common.constant.RedisConstant;
 import com.xishanqu.redpacket.mapper.RedPacketMapper;
 import com.xishanqu.redpacket.pojo.RedPacket;
 import lombok.extern.slf4j.Slf4j;
@@ -37,14 +36,12 @@ public class RedPacketService {
      */
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int addRedPacket(RedPacket redPacket){
-        //发送kafka消息
-        kafkaService.sendMessage(topicName, JSON.toJSONString(redPacket));
-
         redPacketMapper.addRedPacket(redPacket);
-        //添加缓存
-        redisTemplate.opsForValue().set(RedisConstant.Red_Packet + redPacket.getId() + "", redPacket);
-
-        return redPacket.getId().intValue();
+        Long redPacketId = redPacket.getId();
+        RedPacket packet = redPacketMapper.getRedPacket(redPacketId);
+        //发送kafka消息
+        kafkaService.sendMessage(topicName, JSON.toJSONString(packet));
+        return packet.getId().intValue();
     }
 
     /**

@@ -92,20 +92,4 @@
 
 
 
-  <update id="updateByPrimaryKey" parameterType="com.xishanqu.redpacket.pojo.RedPacket">
-    update t_red_packet
-    set user_id = #{userId,jdbcType=INTEGER},
-      amount = #{amount,jdbcType=DECIMAL},
-      send_date = #{sendDate,jdbcType=TIMESTAMP},
-      total = #{total,jdbcType=INTEGER},
-      unit_amount = #{unitAmount,jdbcType=DECIMAL},
-      stock = #{stock,jdbcType=INTEGER},
-      version = #{version,jdbcType=INTEGER},
-      note = #{note,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-
-
-
-
 </mapper>

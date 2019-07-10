@@ -52,6 +52,5 @@ public interface RedPacketMapper {
     int decreaseRedPacketForVersion(Long id, Integer version);
 
 
-    int updateByPrimaryKey(RedPacket redPacket);
 
 }
