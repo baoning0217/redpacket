@@ -13,7 +13,6 @@ spring:
     port: 6379
     database: 0
     password: redis.baoning.123456
-
   # kafka
   kafka:
     bootstrap-servers: 192.168.1.6:9092
@@ -39,6 +38,12 @@ spring:
       max-file-size: 5MB
       max-request-size: 10MB
       resolve-lazily: false
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
 
 # 配置kafka-topic
 kafka:
