@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 /**
  * @Author BaoNing 2019/7/2
@@ -56,8 +57,10 @@ public class RedPacketService {
     public RedPacket getRedPacket(Long id){
         RedPacket redPacket = redPacketMapper.getRedPacket(id);
         //添加到MongoDB缓存
-        redPacketDao.saveRedPacket(redPacket);
-        log.info("saveRedPacket to MongoDB>>>>>>redPacket={}", redPacket);
+        if (!ObjectUtils.isEmpty(redPacket)) {
+            redPacketDao.saveRedPacket(redPacket);
+            log.info("saveRedPacket to MongoDB>>>>>>redPacket={}", redPacket);
+        }
         return redPacket;
     }
 

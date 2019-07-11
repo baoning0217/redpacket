@@ -55,6 +55,10 @@ spring:
       username: admin
       password: mongo.baoning.123456
 
+# 配置session共享
+  session:
+    store-type: redis
+
 
 # 配置kafka-topic
 kafka:
