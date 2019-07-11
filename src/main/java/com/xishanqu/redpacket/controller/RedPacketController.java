@@ -3,6 +3,7 @@ package com.xishanqu.redpacket.controller;
 import com.xishanqu.redpacket.pojo.RedPacket;
 import com.xishanqu.redpacket.service.RedPacketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,18 @@ public class RedPacketController {
 
     @Autowired
     private RedPacketService redPacketService;
+
+
+    /**
+     * 获取指定红包
+     * @param redPacket
+     * @return
+     */
+    @PostMapping("/get")
+    public RedPacket getRedPacket(@RequestBody RedPacket redPacket){
+        return redPacketService.getRedPacket(redPacket.getId());
+    }
+
 
     /**
      * 插入红包
