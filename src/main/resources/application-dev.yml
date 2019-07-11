@@ -40,6 +40,12 @@ spring:
       resolve-lazily: false
       file-size-threshold: 0
       location: C:\\temp
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
 
   mvc:
     static-path-pattern: /statis/**
