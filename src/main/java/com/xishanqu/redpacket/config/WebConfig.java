@@ -34,7 +34,7 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
                 //表示拦截的路径
                 .addPathPatterns("/**")
                 //表示排除的路径
-                .excludePathPatterns("/admin");
+                .excludePathPatterns("/admin/**");
     }
 
     /**

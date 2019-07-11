@@ -32,6 +32,7 @@ public class LogAspect {
     @Before(value = "pointcut()")
     public void before(JoinPoint joinPoint){
         String name = joinPoint.getSignature().getName();
+        System.err.println("当前时间戳:"+ System.currentTimeMillis());
         System.out.println(name + "方法开始执行...");
     }
 
@@ -42,6 +43,7 @@ public class LogAspect {
     @After(value = "pointcut()")
     public void after(JoinPoint joinPoint){
         String name = joinPoint.getSignature().getName();
+        System.err.println("当前时间戳:"+ System.currentTimeMillis());
         System.out.println(name + "方法执行结束...");
     }
 
@@ -67,6 +69,12 @@ public class LogAspect {
         System.out.println(name + "方法抛出异常了，异常是:" + ex.getMessage());
     }
 
+    /**
+     * 表示一个环绕通知
+     * @param proceedingJoinPoint
+     * @return
+     * @throws Throwable
+     */
     @Around("pointcut()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
         return proceedingJoinPoint.proceed();
