@@ -3,6 +3,7 @@ package com.xishanqu.redpacket.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(value = "t_red_packet")
 public class RedPacket implements Serializable {
 
     private static final long serialVersionUID = 1L;

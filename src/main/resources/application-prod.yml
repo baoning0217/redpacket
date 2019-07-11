@@ -45,6 +45,17 @@ spring:
     servlet:
       content-type: text/html
 
+# 配置mongodb
+  data:
+    mongodb:
+      host: 192.168.1.6
+      port: 27017
+      authentication-database: admin
+      database: redpacket
+      username: admin
+      password: mongo.baoning.123456
+
+
 # 配置kafka-topic
 kafka:
   topic:

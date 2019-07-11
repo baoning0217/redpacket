@@ -1,6 +1,7 @@
 package com.xishanqu.redpacket.service;
 
 import com.alibaba.fastjson.JSON;
+import com.xishanqu.redpacket.dao.RedPacketDao;
 import com.xishanqu.redpacket.mapper.RedPacketMapper;
 import com.xishanqu.redpacket.pojo.RedPacket;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,8 @@ public class RedPacketService {
     private String topicName;
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private RedPacketDao redPacketDao;
 
 
     /**
@@ -51,7 +54,11 @@ public class RedPacketService {
      */
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public RedPacket getRedPacket(Long id){
-        return redPacketMapper.getRedPacket(id);
+        RedPacket redPacket = redPacketMapper.getRedPacket(id);
+        //添加到MongoDB缓存
+        redPacketDao.saveRedPacket(redPacket);
+        log.info("saveRedPacket to MongoDB>>>>>>redPacket={}", redPacket);
+        return redPacket;
     }
 
     /**
