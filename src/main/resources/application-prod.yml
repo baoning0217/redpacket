@@ -59,6 +59,13 @@ spring:
   session:
     store-type: redis
 
+# rabbitmq
+  rabbitmq:
+    host: 192.168.1.6
+    port: 5672
+    username: admin
+    password: rabbitmq.baoning.123456
+
 
 # 配置kafka-topic
 kafka:

@@ -74,11 +74,19 @@ spring:
   session:
     store-type: redis
 
+# rabbitmq
+  rabbitmq:
+    host: 192.168.207.40
+    port: 5672
+    username: admin
+    password: rabbitmq.baoning.123456
+
 # kafka-topic
 kafka:
   topic:
     group-id: redpacket-group
     redpacket-topic: dev_redpacket_topic_statistics
+
 
 # mybatis
 mybatis:
