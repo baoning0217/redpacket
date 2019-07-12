@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+
 /**
  * @Author BaoNing 2019/7/2
  */
@@ -38,20 +40,16 @@ public class RedPacketController {
     @RequestMapping("/create")
     public int insertRedPacket(@RequestBody RedPacket redPacket){
 
-        redPacket.setNote("2019-07-09");
+        LocalDate localDate = LocalDate.now();
+        redPacket.setNote(localDate.toString());
         redPacket.setVersion(0);
-
         //总金额
         Double amount = redPacket.getAmount();
-
         //总数
         Integer total = redPacket.getTotal();
-
         redPacket.setStock(total);
-
         Double unitAmount =  amount/total;
         redPacket.setUnitAmount(unitAmount);
-
         int result = redPacketService.addRedPacket(redPacket);
         return result;
     }
