@@ -73,6 +73,15 @@ kafka:
     group-id: redpacket-group
     redpacket-topic: dev_redpacket_topic_statistics
 
+# 配置rabbitmq-topic
+rabbitmq:
+  topic:
+    redpacket-topic: prod_redpacket_topic_rabbitmq
+  queue:
+    redpacket-queue: prod_redpacket_queue_rabbitmq
+  routingKey:
+    redpacket-routingKey: #.redPacket.#
+
 
 #mybatis
 mybatis:

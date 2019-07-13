@@ -1,18 +1,18 @@
 package com.xishanqu.redpacket.service;
 
 import com.alibaba.fastjson.JSON;
+import com.xishanqu.redpacket.common.kafka.KafkaService;
+import com.xishanqu.redpacket.common.rabbitmq.RabbitMQSender;
 import com.xishanqu.redpacket.dao.RedPacketDao;
 import com.xishanqu.redpacket.mapper.RedPacketMapper;
 import com.xishanqu.redpacket.pojo.RedPacket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 
 /**
  * @Author BaoNing 2019/7/2
@@ -28,9 +28,10 @@ public class RedPacketService {
     @Value("${kafka.topic.redpacket-topic}")
     private String topicName;
     @Autowired
-    private RedisTemplate redisTemplate;
-    @Autowired
     private RedPacketDao redPacketDao;
+    @Autowired
+    private RabbitMQSender rabbitMQSender;
+
 
 
     /**
@@ -57,10 +58,14 @@ public class RedPacketService {
     public RedPacket getRedPacket(Long id){
         RedPacket redPacket = redPacketMapper.getRedPacket(id);
         //添加到MongoDB缓存
-        if (!ObjectUtils.isEmpty(redPacket)) {
-            redPacketDao.saveRedPacket(redPacket);
-            log.info("saveRedPacket to MongoDB>>>>>>redPacket={}", redPacket);
-        }
+//        if (!ObjectUtils.isEmpty(redPacket)) {
+//            redPacketDao.saveRedPacket(redPacket);
+//            log.info("saveRedPacket to MongoDB>>>>>>redPacket={}", redPacket);
+//        }
+        //发送rabbitmq消息
+        log.info("发送RabbitMQ消息开始>>>>>>>>>>>start");
+        rabbitMQSender.send(JSON.toJSONString(redPacket));
+        log.info("发送RabbitMQ消息结束>>>>>>>>>>>end");
         return redPacket;
     }
 

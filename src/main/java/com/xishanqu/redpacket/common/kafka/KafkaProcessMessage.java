@@ -1,4 +1,4 @@
-package com.xishanqu.redpacket.service;
+package com.xishanqu.redpacket.common.kafka;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xishanqu.redpacket.common.constant.RedisConstant;
