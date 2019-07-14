@@ -66,6 +66,16 @@ spring:
     username: admin
     password: rabbitmq.baoning.123456
 
+# mail
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: captainbn@qq.com
+    password: togoumfnzjqncfjf
+    default-encoding: UTF-8
+    properties.mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+    properties.mail.debug: true
+
 
 # 配置kafka-topic
 kafka:

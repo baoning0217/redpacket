@@ -1,7 +1,9 @@
 package com.xishanqu.redpacket.service;
 
 import com.alibaba.fastjson.JSON;
+import com.xishanqu.redpacket.bean.MailInfo;
 import com.xishanqu.redpacket.common.kafka.KafkaService;
+import com.xishanqu.redpacket.common.mail.MailService;
 import com.xishanqu.redpacket.common.rabbitmq.RabbitMQSender;
 import com.xishanqu.redpacket.dao.RedPacketDao;
 import com.xishanqu.redpacket.mapper.RedPacketMapper;
@@ -31,6 +33,8 @@ public class RedPacketService {
     private RedPacketDao redPacketDao;
     @Autowired
     private RabbitMQSender rabbitMQSender;
+    @Autowired
+    private MailService mailService;
 
 
 
@@ -46,6 +50,12 @@ public class RedPacketService {
         RedPacket packet = redPacketMapper.getRedPacket(redPacketId);
         //发送kafka消息
         kafkaService.sendMessage(topicName, JSON.toJSONString(packet));
+        //发送mail通知
+        MailInfo mail = new MailInfo();
+        log.info("发送邮件通知开始>>>>>>>>>>mail={}", mail);
+        mailService.sendSimpleMail(mail.getFrom(), mail.getTo(), mail.getCc(), mail.getSubject(), mail.getContent());
+        log.info("发送邮件通知完毕>>>>>>>>>>>>>>>mail={}", mail);
+
         return packet.getId().intValue();
     }
 
