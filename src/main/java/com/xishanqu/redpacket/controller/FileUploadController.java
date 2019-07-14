@@ -1,5 +1,9 @@
 package com.xishanqu.redpacket.controller;
 
+import com.xishanqu.redpacket.bean.MailInfo;
+import com.xishanqu.redpacket.common.mail.MailService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +21,37 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/admin/file")
+@Slf4j
 public class FileUploadController {
+
+    @Autowired
+    private MailService mailService;
+
+    public final static MailInfo mailInfo = new MailInfo();
+
+
+    /**
+     * 发送附件文件
+     * @param multipartFile
+     */
+    @PostMapping("/mail")
+    public void sendAttachMail(@RequestParam(value = "upFile") MultipartFile multipartFile){
+
+        //TODO 待转化
+        //发送邮件
+        try {
+            mailService.sendAttachFileMail(
+                    mailInfo.getFrom(),
+                    mailInfo.getTo(),
+                    mailInfo.getCc(),
+                    mailInfo.getSubject(),
+                    mailInfo.getContent(),
+                    multipartFile);
+        }catch (Exception ex){
+            log.info("发送邮件失败>>>>>>>>>>ex={}", ex);
+        }
+    }
+
 
     /**
      * file upload

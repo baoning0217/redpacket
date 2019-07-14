@@ -38,6 +38,7 @@ spring:
       max-file-size: 5MB
       max-request-size: 10MB
       resolve-lazily: false
+
   thymeleaf:
     cache: false
     mode: HTML
