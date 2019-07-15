@@ -2,11 +2,12 @@ package com.xishanqu.redpacket.controller;
 
 import com.xishanqu.redpacket.pojo.RedPacket;
 import com.xishanqu.redpacket.service.RedPacketService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -15,6 +16,7 @@ import java.time.LocalDate;
  */
 @RestController
 @RequestMapping("/admin/redPacket")
+@Api(tags = "红包数据接口")
 public class RedPacketController {
 
     @Autowired
@@ -23,12 +25,14 @@ public class RedPacketController {
 
     /**
      * 获取指定红包
-     * @param redPacket
+     * @param id
      * @return
      */
-    @PostMapping("/get")
-    public RedPacket getRedPacket(@RequestBody RedPacket redPacket){
-        return redPacketService.getRedPacket(redPacket.getId());
+    @ApiOperation(value = "查询红包", notes = "根据id查询")
+    @ApiImplicitParam(paramType = "path", name = "id", value = "红包id", required = true)
+    @GetMapping("/get")
+    public RedPacket getRedPacket(@RequestParam(value = "id") Long id){
+        return redPacketService.getRedPacket(id);
     }
 
 
@@ -37,7 +41,13 @@ public class RedPacketController {
      * @param redPacket
      * @return
      */
-    @RequestMapping("/create")
+    @ApiOperation(value = "新增红包", notes = "新增一个红包")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query",name = "userId", value = "用户id", required = true),
+            @ApiImplicitParam(paramType = "query", name = "amount", value = "红包总额", required = true),
+            @ApiImplicitParam(paramType = "query", name = "total", value = "红包总数", required = true)
+    })
+    @PostMapping("/create")
     public int insertRedPacket(@RequestBody RedPacket redPacket){
 
         LocalDate localDate = LocalDate.now();

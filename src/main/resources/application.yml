@@ -1,3 +1,9 @@
 spring:
   profiles:
-    active: prod
+    active: dev
+
+# 关闭热部署
+  devtools:
+    restart:
+      enabled: false
+

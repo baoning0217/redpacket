@@ -1,5 +1,6 @@
 package com.xishanqu.redpacket.pojo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(value = "t_red_packet")
+@ApiModel(value = "红包实体类", description = "红包信息描述")
 public class RedPacket implements Serializable {
 
     private static final long serialVersionUID = 1L;

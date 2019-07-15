@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-@RabbitListener(queues = "prod_redpacket_queue_rabbitmq")
+@RabbitListener(queues = "redpacket_queue_rabbitmq")
 public class RabbitMQSender {
 
     private final RabbitTemplate rabbitTemplate;

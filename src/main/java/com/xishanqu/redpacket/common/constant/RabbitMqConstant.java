@@ -7,9 +7,9 @@ package com.xishanqu.redpacket.common.constant;
  */
 public class RabbitMqConstant {
 
-    public final static String TOPIC = "prod_redpacket_topic_rabbitmq";
+    public final static String TOPIC = "redpacket_topic_rabbitmq";
 
-    public final static String QUEUE = "prod_redpacket_queue_rabbitmq";
+    public final static String QUEUE = "redpacket_queue_rabbitmq";
 
     public final static String ROUTINGKEY = "#.redPacket.#";
 

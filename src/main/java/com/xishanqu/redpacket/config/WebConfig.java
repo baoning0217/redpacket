@@ -5,6 +5,7 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.xishanqu.redpacket.handler.WebHandler;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
@@ -21,7 +22,8 @@ import java.util.concurrent.Executor;
  */
 @Configuration
 @EnableWebMvc
-public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigurer {
+@Import(SwaggerConfig.class)
+public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigurer  {
 
 
     /**
@@ -49,11 +51,11 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
                 //表示允许的请求头，默认允许所有的请求头信息
                 .allowedHeaders("*")
                 //表示允许的请求方法，默认是GET、POST和HEAD; * 表示支持所有的请求方法
-                .allowedMethods("*")
+                .allowedMethods("GET","POST")
                 //表示探测请求的有效期
                 .maxAge(1800)
                 //表示支持的域
-                .allowedOrigins("http://localhost:8090");
+                .allowedOrigins("*");
     }
 
 
@@ -65,6 +67,7 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
+
     }
 
 

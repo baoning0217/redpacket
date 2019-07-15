@@ -100,9 +100,9 @@ kafka:
 # 配置rabbitmq-topic
 rabbitmq:
   topic:
-    redpacket-topic: prod_redpacket_topic_rabbitmq
+    redpacket-topic: redpacket_topic_rabbitmq
   queue:
-    redpacket-queue: prod_redpacket_queue_rabbitmq
+    redpacket-queue: redpacket_queue_rabbitmq
   routingKey:
     redpacket-routingKey: #.redPacket.#
 

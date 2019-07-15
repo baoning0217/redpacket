@@ -4,6 +4,13 @@ package com.xishanqu.redpacket.mapper;
 import com.xishanqu.redpacket.pojo.RedPacket;
 import org.apache.ibatis.annotations.Mapper;
 
+/**
+ * RedPacketMapper
+ * @Param
+ * @Return
+ * @Author BaoNing
+ * @Time
+ */
 @Mapper
 public interface RedPacketMapper {
 
