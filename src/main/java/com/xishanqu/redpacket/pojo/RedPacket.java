@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -32,6 +33,7 @@ public class RedPacket implements Serializable {
      * 发红包用户
      */
     @ApiModelProperty(value = "用户id")
+    @NotNull(message = "{redpacket.userId.notnull}")
     private Long userId;
 
     /**

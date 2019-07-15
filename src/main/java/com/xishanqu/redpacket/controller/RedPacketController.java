@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -55,7 +56,7 @@ public class RedPacketController {
             @ApiImplicitParam(paramType = "query", name = "total", value = "红包总数", required = true)
     })
     @PostMapping("/create")
-    public int insertRedPacket(@RequestBody RedPacket redPacket){
+    public int insertRedPacket(@RequestBody @Validated RedPacket redPacket){
 
         LocalDate localDate = LocalDate.now();
         redPacket.setNote(localDate.toString());
