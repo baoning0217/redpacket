@@ -27,9 +27,16 @@ public class RedPacketController {
      * 获取指定红包
      * @param id
      * @return
+     *
+     *             # paramType
+     *             · header --> 请求参数的获取：@RequestHeader
+     *             · query --> 请求参数的获取：@RequestParam
+     *             · path（用于restful接口）--> 请求参数的获取：@PathVariable
+     *             · body（不常用）
+     *             · form（不常用）
      */
     @ApiOperation(value = "查询红包", notes = "根据id查询")
-    @ApiImplicitParam(paramType = "path", name = "id", value = "红包id", required = true)
+    @ApiImplicitParam(paramType = "query", name = "id", value = "红包id", required = true)
     @GetMapping("/get")
     public RedPacket getRedPacket(@RequestParam(value = "id") Long id){
         return redPacketService.getRedPacket(id);

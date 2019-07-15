@@ -2,6 +2,7 @@ package com.xishanqu.redpacket.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
  */
 @RestController
 @RequestMapping("/admin/session")
+@ApiIgnore
 public class SessionController {
 
     @Value("${server.port}")
