@@ -25,6 +25,6 @@ public class QiNiuConstant {
     /**
      * domain_name
      */
-    public static final String QINIU_DOMAINNAME = "cdn.xishanqu.com";
+    public static final String QINIU_DOMAINNAME = "image.xishanqu.com";
 
 }
