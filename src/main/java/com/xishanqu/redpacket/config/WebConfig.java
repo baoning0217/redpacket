@@ -34,7 +34,7 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new WebHandler())
                 //表示拦截的路径
-                .addPathPatterns("/**")
+                .addPathPatterns("/admin/**")
                 //表示排除的路径
                 .excludePathPatterns("/admin/**");
     }
@@ -65,9 +65,9 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/");
-
+        registry.addResourceHandler("/static/**","/templates/**")
+                .addResourceLocations("classpath:/static/**")
+                .addResourceLocations("classpath:/templates/**");
     }
 
 
