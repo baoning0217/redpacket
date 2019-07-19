@@ -1,7 +1,7 @@
 package com.xishanqu.redpacket.service;
 
 import com.alibaba.fastjson.JSON;
-import com.xishanqu.redpacket.bean.MailInfo;
+import com.xishanqu.redpacket.common.bean.MailInfo;
 import com.xishanqu.redpacket.common.kafka.KafkaService;
 import com.xishanqu.redpacket.common.mail.MailService;
 import com.xishanqu.redpacket.common.rabbitmq.RabbitMQSender;

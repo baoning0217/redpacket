@@ -1,4 +1,4 @@
-package com.xishanqu.redpacket.handler;
+package com.xishanqu.redpacket.common.handler;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

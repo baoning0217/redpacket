@@ -3,7 +3,7 @@ package com.xishanqu.redpacket.config;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.xishanqu.redpacket.handler.WebHandler;
+import com.xishanqu.redpacket.common.handler.WebHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;

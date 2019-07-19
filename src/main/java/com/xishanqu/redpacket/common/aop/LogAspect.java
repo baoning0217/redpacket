@@ -1,4 +1,4 @@
-package com.xishanqu.redpacket.aop;
+package com.xishanqu.redpacket.common.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

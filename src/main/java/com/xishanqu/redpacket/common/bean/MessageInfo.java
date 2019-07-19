@@ -1,4 +1,4 @@
-package com.xishanqu.redpacket.bean;
+package com.xishanqu.redpacket.common.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

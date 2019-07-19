@@ -1,4 +1,4 @@
-package com.xishanqu.redpacket.handler;
+package com.xishanqu.redpacket.common.handler;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

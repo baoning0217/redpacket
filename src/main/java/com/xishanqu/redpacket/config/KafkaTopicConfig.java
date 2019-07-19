@@ -1,6 +1,6 @@
 package com.xishanqu.redpacket.config;
 
-import com.xishanqu.redpacket.bean.KafkaTopicProperties;
+import com.xishanqu.redpacket.common.bean.KafkaTopicProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

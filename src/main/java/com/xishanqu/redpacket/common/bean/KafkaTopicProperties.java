@@ -1,4 +1,4 @@
-package com.xishanqu.redpacket.bean;
+package com.xishanqu.redpacket.common.bean;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

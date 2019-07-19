@@ -1,6 +1,6 @@
 package com.xishanqu.redpacket.controller;
 
-import com.xishanqu.redpacket.bean.MailInfo;
+import com.xishanqu.redpacket.common.bean.MailInfo;
 import com.xishanqu.redpacket.common.mail.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
