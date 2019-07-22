@@ -2,6 +2,7 @@ package com.xishanqu.redpacket.service;
 
 import com.alibaba.fastjson.JSON;
 import com.xishanqu.redpacket.common.bean.MailInfo;
+import com.xishanqu.redpacket.common.constant.RedisConstant;
 import com.xishanqu.redpacket.common.kafka.KafkaService;
 import com.xishanqu.redpacket.common.mail.MailService;
 import com.xishanqu.redpacket.common.rabbitmq.RabbitMQSender;
@@ -11,10 +12,12 @@ import com.xishanqu.redpacket.pojo.RedPacket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 /**
  * @Author BaoNing 2019/7/2
@@ -35,6 +38,8 @@ public class RedPacketService {
     private RabbitMQSender rabbitMQSender;
     @Autowired
     private MailService mailService;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
 
@@ -66,7 +71,16 @@ public class RedPacketService {
      */
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public RedPacket getRedPacket(Long id){
+
+        //从redis缓存里获取
+        RedPacket redPacket_For_Redis = (RedPacket)redisTemplate.opsForValue().get(RedisConstant.Red_Packet + id + "");
+        if (!ObjectUtils.isEmpty(redPacket_For_Redis)){
+            return redPacket_For_Redis;
+        }
         RedPacket redPacket = redPacketMapper.getRedPacket(id);
+        if (!ObjectUtils.isEmpty(redPacket)){
+            redisTemplate.opsForValue().set(RedisConstant.Red_Packet + redPacket.getId() + "", redPacket);
+        }
         //添加到MongoDB缓存
 //        if (!ObjectUtils.isEmpty(redPacket)) {
 //            redPacketDao.saveRedPacket(redPacket);

@@ -2,6 +2,7 @@ package com.xishanqu.redpacket.controller;
 
 import com.xishanqu.redpacket.pojo.RedPacket;
 import com.xishanqu.redpacket.service.RedPacketService;
+import com.xishanqu.redpacket.service.RedissonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -22,6 +23,21 @@ public class RedPacketController {
 
     @Autowired
     private RedPacketService redPacketService;
+    @Autowired
+    private RedissonService redissonService;
+
+
+    /**
+     * Redisson获取
+     * @Param
+     * @Return
+     * @Author BaoNing
+     * @Time
+     */
+    @GetMapping("/getForRedisson")
+    public RedPacket getRedPacketForRedisson(@RequestParam(value = "id") Long id){
+        return redissonService.reduceRedPacket(id);
+    }
 
 
     /**

@@ -1,11 +1,11 @@
 package com.xishanqu.redpacket.controller;
 
+import com.xishanqu.redpacket.common.bean.ImageServer;
 import com.xishanqu.redpacket.common.bean.MailInfo;
 import com.xishanqu.redpacket.common.mail.MailService;
 import com.xishanqu.redpacket.common.util.FastDFSClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,9 +28,11 @@ public class FileUploadController{
 
     @Autowired
     private MailService mailService;
-    @Value("")
 
     public final static MailInfo mailInfo = new MailInfo();
+
+    @Autowired
+    private ImageServer imageServer;
 
 
 
@@ -45,7 +47,7 @@ public class FileUploadController{
     public String fastDFSUpload(@RequestParam(value = "fastFile") MultipartFile file) throws Exception{
         FastDFSClient fastDFSClient = new FastDFSClient("classpath:client.conf");
         String fileId = fastDFSClient.fastDFSUpload(file);
-        return fileId;
+        return imageServer.getImageServerUrl() + ":" + imageServer.getImageServerPort()+ "/" + fileId;
     }
 
 
