@@ -116,5 +116,6 @@ mybatis:
 
 # 图片服务器地址
 image:
-  server: http://192.168.207.40
-  port: 8888
+  server:
+    url: http://192.168.207.40
+    port: 8888

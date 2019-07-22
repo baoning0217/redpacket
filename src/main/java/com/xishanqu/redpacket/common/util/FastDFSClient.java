@@ -1,8 +1,9 @@
 package com.xishanqu.redpacket.common.util;
 
+import com.xishanqu.redpacket.config.ImageServer;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -10,10 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class FastDFSClient {
 
-    @Value(value = "${image.server}")
-    private String imageServer;
-    @Value(value = "${image.port}")
-    private String imagePort;
+    @Autowired
+    private ImageServer imageServer;
 
     private TrackerClient trackerClient = null;
     private TrackerServer trackerServer = null;
@@ -54,9 +53,8 @@ public class FastDFSClient {
             metaList[1] = new NameValuePair("fileExtName", fileExtName);
             metaList[2] = new NameValuePair("fileLength", String.valueOf(file.getSize()));
             fileId = this.uploadFile(fileBytes, fileExtName, metaList);
-
             //返回上传文件的id
-            return imageServer + "/" + imagePort + "/" + fileId;
+            return imageServer.getImageServerUrl() + ":" + imageServer.getImageServerPort()+ "/" + fileId;
         }catch (Exception ex){
             ex.printStackTrace();
         }
