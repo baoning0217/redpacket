@@ -113,3 +113,8 @@ rabbitmq:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.xishanqu.redpacket.mapper
+
+# 图片服务器地址
+image:
+  server: http://192.168.207.40
+  port: 8888
