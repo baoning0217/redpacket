@@ -4,6 +4,7 @@ import com.xishanqu.redpacket.common.bean.MailInfo;
 import com.xishanqu.redpacket.common.mail.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,12 +23,30 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/admin/file")
 @Slf4j
-public class FileUploadController {
+public class FileUploadController{
 
     @Autowired
     private MailService mailService;
+    @Value("")
 
     public final static MailInfo mailInfo = new MailInfo();
+
+
+
+    /**
+     * 文件上传
+     * @Param
+     * @Return
+     * @Author BaoNing
+     * @Time 2019/07/22
+     */
+    @PostMapping("/fast")
+    public String fastDFSUpload(@RequestParam(value = "fastFile") MultipartFile file) throws Exception{
+        //FastDFSClient fastDFSClient = new FastDFSClient("classpath:client.conf");
+       // String fileId = fastDFSClient.fastDFSUpload(file);
+       // return fileId;
+        return null;
+    }
 
 
     /**

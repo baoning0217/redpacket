@@ -2,6 +2,7 @@ package com.xishanqu.redpacket.common.util;
 
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Author BaoNing 2019/7/19
@@ -18,11 +19,41 @@ public class FastDFSClient {
             conf = conf.replace("classpath:", this.getClass().getResource("/").getPath());
         }
         ClientGlobal.init(conf);
+        //建立连接
         trackerClient = new TrackerClient();
         trackerServer = trackerClient.getConnection();
         storageServer = null;
         storageClient = new StorageClient1(trackerServer, storageServer);
     }
+
+
+    /**
+     * fastDFS Upload
+     * @Param
+     * @Return
+     * @Author BaoNing
+     * @Time
+     */
+    public String fastDFSUpload(MultipartFile file) throws Exception{
+        String fileId = "";
+        try {
+            byte[] fileBytes = file.getBytes();
+            String tempFileName = file.getOriginalFilename();
+            String fileExtName = tempFileName.substring(tempFileName.lastIndexOf("."));
+            //设置元信息
+            NameValuePair[] metaList = new NameValuePair[3];
+            metaList[0] = new NameValuePair("fileName", tempFileName);
+            metaList[1] = new NameValuePair("fileExtName", fileExtName);
+            metaList[2] = new NameValuePair("fileLength", String.valueOf(file.getSize()));
+            fileId = this.uploadFile(fileBytes, fileExtName, metaList);
+            //返回上传文件的id
+            return fileId;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return fileId;
+    }
+
 
     /**
      * 上传文件方法
