@@ -2,6 +2,7 @@ package com.xishanqu.redpacket.controller;
 
 import com.xishanqu.redpacket.common.bean.MailInfo;
 import com.xishanqu.redpacket.common.mail.MailService;
+import com.xishanqu.redpacket.common.util.FastDFSClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,10 +43,9 @@ public class FileUploadController{
      */
     @PostMapping("/fast")
     public String fastDFSUpload(@RequestParam(value = "fastFile") MultipartFile file) throws Exception{
-        //FastDFSClient fastDFSClient = new FastDFSClient("classpath:client.conf");
-       // String fileId = fastDFSClient.fastDFSUpload(file);
-       // return fileId;
-        return null;
+        FastDFSClient fastDFSClient = new FastDFSClient("classpath:client.conf");
+        String fileId = fastDFSClient.fastDFSUpload(file);
+        return fileId;
     }
 
 

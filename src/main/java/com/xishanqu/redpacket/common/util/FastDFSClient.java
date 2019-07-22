@@ -37,9 +37,11 @@ public class FastDFSClient {
     public String fastDFSUpload(MultipartFile file) throws Exception{
         String fileId = "";
         try {
+            //以二进制数组返回文件的内容
             byte[] fileBytes = file.getBytes();
+            //获得在客户端文件系统当中初始化的名称
             String tempFileName = file.getOriginalFilename();
-            String fileExtName = tempFileName.substring(tempFileName.lastIndexOf("."));
+            String fileExtName = tempFileName.substring(tempFileName.lastIndexOf(".") + 1);
             //设置元信息
             NameValuePair[] metaList = new NameValuePair[3];
             metaList[0] = new NameValuePair("fileName", tempFileName);
