@@ -19,10 +19,11 @@ public class RedPacketDao {
 
     /**
      * 添加到Mongo缓存
+     *
      * @param redPacket
      */
-    public void saveRedPacket(RedPacket redPacket){
-        if (!ObjectUtils.isEmpty(redPacket)){
+    public void saveRedPacket(RedPacket redPacket) {
+        if (!ObjectUtils.isEmpty(redPacket)) {
             mongoTemplate.save(redPacket);
         }
     }

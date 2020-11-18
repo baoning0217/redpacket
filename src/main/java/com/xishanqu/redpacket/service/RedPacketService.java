@@ -42,14 +42,14 @@ public class RedPacketService {
     private RedisTemplate redisTemplate;
 
 
-
     /**
      * 创建插入红包
+     *
      * @param redPacket
      * @return
      */
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int addRedPacket(RedPacket redPacket){
+    public int addRedPacket(RedPacket redPacket) {
         redPacketMapper.addRedPacket(redPacket);
         Long redPacketId = redPacket.getId();
         RedPacket packet = redPacketMapper.getRedPacket(redPacketId);
@@ -66,19 +66,20 @@ public class RedPacketService {
 
     /**
      * 获取红包信息
+     *
      * @param id
      * @return
      */
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public RedPacket getRedPacket(Long id){
+    public RedPacket getRedPacket(Long id) {
 
         //从redis缓存里获取
-        RedPacket redPacket_For_Redis = (RedPacket)redisTemplate.opsForValue().get(RedisConstant.Red_Packet + id + "");
-        if (!ObjectUtils.isEmpty(redPacket_For_Redis)){
+        RedPacket redPacket_For_Redis = (RedPacket) redisTemplate.opsForValue().get(RedisConstant.Red_Packet + id + "");
+        if (!ObjectUtils.isEmpty(redPacket_For_Redis)) {
             return redPacket_For_Redis;
         }
         RedPacket redPacket = redPacketMapper.getRedPacket(id);
-        if (!ObjectUtils.isEmpty(redPacket)){
+        if (!ObjectUtils.isEmpty(redPacket)) {
             redisTemplate.opsForValue().set(RedisConstant.Red_Packet + redPacket.getId() + "", redPacket);
         }
         //添加到MongoDB缓存
@@ -95,11 +96,12 @@ public class RedPacketService {
 
     /**
      * 扣减红包数
+     *
      * @param id
      * @return
      */
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int decreaseRedPacket(Long id){
+    public int decreaseRedPacket(Long id) {
         return redPacketMapper.decreaseRedPacket(id);
     }
 

@@ -20,11 +20,11 @@ public class RedpacketApplicationTests {
 
 
     @Test
-    public void grabRedPacket(){
+    public void grabRedPacket() {
 
-        for (long i =1; i< 20001; i++){
+        for (long i = 1; i < 20001; i++) {
             int result = userRedPacketService.grabRedPacket(3L, i);
-            System.out.println("抢红包:" + result + "--" +i);
+            System.out.println("抢红包:" + result + "--" + i);
         }
     }
 

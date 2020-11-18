@@ -26,13 +26,14 @@ import java.net.URLEncoder;
 public class ImageUtil {
 
     //凭证
-    private static final Auth auth = Auth.create(QiNiuConstant.QINIU_ACCESSKEY,QiNiuConstant.QINIU_SECRETKEY);
+    private static final Auth auth = Auth.create(QiNiuConstant.QINIU_ACCESSKEY, QiNiuConstant.QINIU_SECRETKEY);
 
     //指定机房,Zone.zone0代表华东地区
     private static final Configuration cfg = new Configuration(Zone.zone0());
 
     /**
      * 图片上传
+     *
      * @param file
      * @param imageName
      * @return
@@ -59,12 +60,12 @@ public class ImageUtil {
                 image.setUrl(imageUrl(imageName));
                 return image;
 
-            }catch (QiniuException ex){
+            } catch (QiniuException ex) {
                 Response r = ex.response;
                 log.info("图片上传失败!", r.toString());
                 return null;
             }
-        } catch (IOException ex){
+        } catch (IOException ex) {
             log.info("图片读取失败!");
             return null;
         }
@@ -72,12 +73,13 @@ public class ImageUtil {
 
     /**
      * 获取图片地址
+     *
      * @param imageName
      * @return
      */
     public static String imageUrl(String imageName) throws UnsupportedEncodingException {
         String encodeImageName = URLEncoder.encode(imageName, "utf-8");
-        String url = String.format("%s/%s",QiNiuConstant.QINIU_DOMAINNAME,encodeImageName);
+        String url = String.format("%s/%s", QiNiuConstant.QINIU_DOMAINNAME, encodeImageName);
         return url;
     }
 

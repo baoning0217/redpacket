@@ -3,7 +3,6 @@ package com.xishanqu.redpacket.common.constant;
 /**
  * Created By BaoNing On 2019/1/23
  * 七牛云静态参数
- *
  */
 public class QiNiuConstant {
 

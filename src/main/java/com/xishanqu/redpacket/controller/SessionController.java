@@ -21,12 +21,13 @@ public class SessionController {
 
     /**
      * 保存session
+     *
      * @param name
      * @param httpSession
      * @return
      */
     @PostMapping("/save")
-    public String saveSession(@RequestParam("name") String name, HttpSession httpSession){
+    public String saveSession(@RequestParam("name") String name, HttpSession httpSession) {
         httpSession.setAttribute("name", name);
         return port;
     }
@@ -34,11 +35,12 @@ public class SessionController {
 
     /**
      * 获取session
+     *
      * @param httpSession
      * @return
      */
     @GetMapping("/get")
-    public String getSession(HttpSession httpSession){
+    public String getSession(HttpSession httpSession) {
         String name = httpSession.getAttribute("name").toString();
         return port + ":" + name;
     }

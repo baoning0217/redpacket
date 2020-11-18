@@ -39,7 +39,7 @@ public class RedPacket implements Serializable {
     /**
      * 红包金额
      */
-    @ApiModelProperty(value = "红包金额" )
+    @ApiModelProperty(value = "红包金额")
     private Double amount;
 
     /**

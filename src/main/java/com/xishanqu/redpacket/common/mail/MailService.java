@@ -23,13 +23,14 @@ public class MailService {
 
     /**
      * 发送简单邮件
-     * @param from 发件人
-     * @param to 收件人
-     * @param cc 抄送人
+     *
+     * @param from    发件人
+     * @param to      收件人
+     * @param cc      抄送人
      * @param subject 主题
      * @param content 内容
      */
-    public void sendSimpleMail(String from, String to, String cc, String subject, String content){
+    public void sendSimpleMail(String from, String to, String cc, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
@@ -41,6 +42,7 @@ public class MailService {
 
     /**
      * 发送带附件邮件
+     *
      * @param from
      * @param to
      * @param cc
@@ -48,7 +50,7 @@ public class MailService {
      * @param content
      * @param file
      */
-    public void sendAttachFileMail(String from, String to, String cc, String subject, String content, MultipartFile file){
+    public void sendAttachFileMail(String from, String to, String cc, String subject, String content, MultipartFile file) {
         try {
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
@@ -59,11 +61,10 @@ public class MailService {
             messageHelper.setText(content);
             messageHelper.addAttachment(file.getName(), file);
             javaMailSender.send(message);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-
 
 
 }

@@ -29,12 +29,13 @@ public class FastDFSClient {
 
     /**
      * fastDFS Upload
+     *
      * @Param
      * @Return
      * @Author BaoNing
      * @Time
      */
-    public String fastDFSUpload(MultipartFile file) throws Exception{
+    public String fastDFSUpload(MultipartFile file) throws Exception {
         String fileId = "";
         try {
             //以二进制数组返回文件的内容
@@ -50,7 +51,7 @@ public class FastDFSClient {
             fileId = this.uploadFile(fileBytes, fileExtName, metaList);
             //返回上传文件的id
             return fileId;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return fileId;
@@ -61,9 +62,10 @@ public class FastDFSClient {
      * 上传文件方法
      * <p>Title: uploadFile</p>
      * <p>Description: </p>
+     *
      * @param fileName 文件全路径
-     * @param extName 文件扩展名，不包含（.）
-     * @param metas 文件扩展信息
+     * @param extName  文件扩展名，不包含（.）
+     * @param metas    文件扩展信息
      * @return
      * @throws Exception
      */
@@ -84,9 +86,10 @@ public class FastDFSClient {
      * 上传文件方法
      * <p>Title: uploadFile</p>
      * <p>Description: </p>
+     *
      * @param fileContent 文件的内容，字节数组
-     * @param extName 文件扩展名
-     * @param metas 文件扩展信息
+     * @param extName     文件扩展名
+     * @param metas       文件扩展信息
      * @return
      * @throws Exception
      */

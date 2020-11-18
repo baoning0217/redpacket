@@ -18,27 +18,29 @@ public class UserRedPacketController {
 
     /**
      * 抢购
+     *
      * @param redPacketId
      * @param userId
      * @return
      */
     @PostMapping("/grab")
-    public int grabRedPacket(Long redPacketId, Long userId){
+    public int grabRedPacket(Long redPacketId, Long userId) {
         int result = userRedPacketService.grabRedPacket(redPacketId, userId);
-        System.err.println("返回值:" + result +",红包id:" + redPacketId + ",抢购用户id:"+ userId);
+        System.err.println("返回值:" + result + ",红包id:" + redPacketId + ",抢购用户id:" + userId);
         return result;
     }
 
     /**
      * Redis抢购
+     *
      * @param redPacketId
      * @param userId
      * @return
      */
     @PostMapping("/grabForRedis")
-    public long grabRedPacketForRedis(Long redPacketId, Long userId){
+    public long grabRedPacketForRedis(Long redPacketId, Long userId) {
         long result = userRedPacketService.grapRedPacketByRedis(redPacketId, userId);
-        System.err.println("返回值:" + result +",红包id:" + redPacketId + ",抢购用户id:"+ userId);
+        System.err.println("返回值:" + result + ",红包id:" + redPacketId + ",抢购用户id:" + userId);
         return result;
     }
 

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 拦截器
+ *
  * @Author BaoNing 2019/7/11
  */
 public class WebHandler implements HandlerInterceptor {

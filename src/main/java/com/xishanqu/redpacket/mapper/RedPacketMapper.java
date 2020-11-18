@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * RedPacketMapper
+ *
  * @Param
  * @Return
  * @Author BaoNing
@@ -16,6 +17,7 @@ public interface RedPacketMapper {
 
     /**
      * 获取红包信息
+     *
      * @param id
      * @return
      */
@@ -23,6 +25,7 @@ public interface RedPacketMapper {
 
     /**
      * 扣减红包数
+     *
      * @param id
      * @return
      */
@@ -30,6 +33,7 @@ public interface RedPacketMapper {
 
     /**
      * 创建红包
+     *
      * @param redPacket
      * @return
      */
@@ -37,6 +41,7 @@ public interface RedPacketMapper {
 
     /**
      * 添加红包
+     *
      * @param redPacket
      * @return
      */
@@ -44,6 +49,7 @@ public interface RedPacketMapper {
 
     /**
      * 悲观锁
+     *
      * @param id
      * @return
      */
@@ -52,12 +58,12 @@ public interface RedPacketMapper {
 
     /**
      * 乐观锁
+     *
      * @param id
      * @param version
      * @return
      */
     int decreaseRedPacketForVersion(Long id, Integer version);
-
 
 
 }

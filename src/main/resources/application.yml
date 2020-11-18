@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
 
-# 关闭热部署
+  # 关闭热部署
   devtools:
     restart:
       enabled: false

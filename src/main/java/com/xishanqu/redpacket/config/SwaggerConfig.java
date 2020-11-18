@@ -18,10 +18,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig implements WebMvcConfigurer   {
+public class SwaggerConfig implements WebMvcConfigurer {
 
     @Bean
-    public Docket docket(){
+    public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.xishanqu.redpacket.controller"))
@@ -33,7 +33,7 @@ public class SwaggerConfig implements WebMvcConfigurer   {
     /**
      * 设置API基础信息
      */
-    private ApiInfo apiInfo(){
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .description("RedPacket接口测试文档")
                 .contact(contact())
@@ -46,8 +46,8 @@ public class SwaggerConfig implements WebMvcConfigurer   {
     /**
      * 设置文档联系方式
      */
-    private Contact contact(){
-        return new Contact("captain","https://github.com/baoning0217", "bnwyyx217@163.com");
+    private Contact contact() {
+        return new Contact("captain", "https://github.com/baoning0217", "bnwyyx217@163.com");
     }
 
     /**

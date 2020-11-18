@@ -22,6 +22,7 @@ public class KafkaProcessMessage {
 
     /**
      * 消费消息
+     *
      * @param record
      */
     @KafkaListener(topics = "${kafka.topic.redpacket-topic}", groupId = "${kafka.topic.group-id}")

@@ -24,7 +24,7 @@ public class RedissonConfig {
     private Integer database;
 
     @Bean
-    public Redisson redissonSentinel(){
+    public Redisson redissonSentinel() {
         Config config = new Config();
 
 //        config.useClusterServers()
@@ -37,7 +37,7 @@ public class RedissonConfig {
         singleServerConfig.setPassword(password);
         singleServerConfig.setDatabase(database);
         RedissonClient redissonClient = Redisson.create(config);
-        return (Redisson)redissonClient;
+        return (Redisson) redissonClient;
     }
 
 }

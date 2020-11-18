@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Author BaoNing Created On 2019年1月22日
-*/
+ */
 @RestController
 @RequestMapping("/admin/image")
 public class ImageController {
@@ -21,11 +21,12 @@ public class ImageController {
 
     /**
      * 图片上传
+     *
      * @param file
      * @return
      */
     @PostMapping("/upload")
-    public int uploadImage(@RequestParam("image") MultipartFile file){
+    public int uploadImage(@RequestParam("image") MultipartFile file) {
         return imageService.insertImage(file);
     }
 

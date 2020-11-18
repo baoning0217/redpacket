@@ -20,10 +20,11 @@ public class QuartzConfig {
 
     /**
      * 第一种形式
+     *
      * @return
      */
     @Bean
-    public MethodInvokingJobDetailFactoryBean jobDetail_One(){
+    public MethodInvokingJobDetailFactoryBean jobDetail_One() {
         MethodInvokingJobDetailFactoryBean bean = new MethodInvokingJobDetailFactoryBean();
         bean.setTargetBeanName("myFirstJob");
         bean.setTargetMethod("sayHello");
@@ -31,7 +32,7 @@ public class QuartzConfig {
     }
 
     @Bean
-    public SimpleTriggerFactoryBean simpleTrigger(){
+    public SimpleTriggerFactoryBean simpleTrigger() {
         SimpleTriggerFactoryBean bean = new SimpleTriggerFactoryBean();
         bean.setJobDetail(jobDetail_One().getObject());
         //配置任务循环次数
@@ -46,10 +47,11 @@ public class QuartzConfig {
 
     /**
      * 第二种形式
+     *
      * @return
      */
     @Bean
-    public JobDetailFactoryBean jobDetail_Two(){
+    public JobDetailFactoryBean jobDetail_Two() {
         JobDetailFactoryBean bean = new JobDetailFactoryBean();
         bean.setJobClass(MySecondJob.class);
         JobDataMap jobDataMap = new JobDataMap();
@@ -74,10 +76,11 @@ public class QuartzConfig {
 
     /**
      * 定时器构建
+     *
      * @return
      */
     @Bean
-    public SchedulerFactoryBean schedulerFactory(){
+    public SchedulerFactoryBean schedulerFactory() {
         SchedulerFactoryBean bean = new SchedulerFactoryBean();
         SimpleTrigger simpleTrigger = simpleTrigger().getObject();
         //CronTrigger cronTrigger = cronTrigger().getObject();

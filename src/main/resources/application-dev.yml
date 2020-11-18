@@ -4,7 +4,7 @@ server:
 
 spring:
 
-# mysql
+  # mysql
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,14 +12,14 @@ spring:
     username: root
     password: mysql.baoning.123456
 
-# redis
+  # redis
   redis:
     host: 192.168.207.40
     port: 6379
     password: redis.baoning.123456
     database: 0
 
-# kafka
+  # kafka
   kafka:
     bootstrap-servers: 192.168.207.40:9092
     producer:
@@ -39,7 +39,7 @@ spring:
       properties:
         session.timeout.ms: 15000
 
-# servlet
+  # servlet
   servlet:
     multipart:
       enabled: true
@@ -49,20 +49,20 @@ spring:
       file-size-threshold: 0
       # location: C:\\temp
 
-# thymeleaf
+  # thymeleaf
   thymeleaf:
     cache: false
     mode: HTML
     encoding: UTF-8
     servlet:
       content-type: text/html
-# mvc
+  # mvc
   mvc:
     static-path-pattern: /statis/**
   resources:
     static-locations: classpath:/static/
 
-# mongodb
+  # mongodb
   data:
     mongodb:
       host: 192.168.207.40
@@ -72,18 +72,18 @@ spring:
       username: admin
       password: mongo.baoning.123456
 
-# session共享
+  # session共享
   session:
     store-type: redis
 
-# rabbitmq
+  # rabbitmq
   rabbitmq:
     host: 192.168.207.40
     port: 5672
     username: admin
     password: rabbitmq.baoning.123456
 
-# mail
+  # mail
   mail:
     host: smtp.qq.com
     port: 465

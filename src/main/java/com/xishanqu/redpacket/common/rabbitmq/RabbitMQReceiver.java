@@ -22,7 +22,7 @@ public class RabbitMQReceiver {
     private RedPacketDao redPacketDao;
 
     @RabbitHandler
-    public void processMessages(String message){
+    public void processMessages(String message) {
         log.info("processMessages>>>>>>>>>>>>message={}", message);
         RedPacket redPacket = JSON.parseObject(message, RedPacket.class);
         redPacketDao.saveRedPacket(redPacket);

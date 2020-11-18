@@ -5,15 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
-  Created By BaoNing On 2019年1月22日
-*/
+ * Created By BaoNing On 2019年1月22日
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Image {
 
-	private String name;
+    private String name;
 
-	private String url;
+    private String url;
 
 }

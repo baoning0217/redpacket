@@ -23,11 +23,12 @@ import java.util.concurrent.Executor;
 @Configuration
 @EnableWebMvc
 @Import(SwaggerConfig.class)
-public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigurer  {
+public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigurer {
 
 
     /**
      * 配置拦截器
+     *
      * @param registry
      */
     @Override
@@ -41,6 +42,7 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
 
     /**
      * 配置跨域请求
+     *
      * @param registry
      */
     @Override
@@ -51,7 +53,7 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
                 //表示允许的请求头，默认允许所有的请求头信息
                 .allowedHeaders("*")
                 //表示允许的请求方法，默认是GET、POST和HEAD; * 表示支持所有的请求方法
-                .allowedMethods("GET","POST")
+                .allowedMethods("GET", "POST")
                 //表示探测请求的有效期
                 .maxAge(1800)
                 //表示支持的域
@@ -61,11 +63,12 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
 
     /**
      * 配置静态资源策略
+     *
      * @param registry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**","/templates/**")
+        registry.addResourceHandler("/static/**", "/templates/**")
                 .addResourceLocations("classpath:/static/**")
                 .addResourceLocations("classpath:/templates/**");
     }
@@ -84,6 +87,7 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
 
     /**
      * 配置fastJson
+     *
      * @param converters
      */
     @Override
@@ -121,7 +125,6 @@ public class WebConfig extends AsyncConfigurerSupport implements WebMvcConfigure
         converter.setFastJsonConfig(config);
         converters.add(converter);
     }
-
 
 
 }

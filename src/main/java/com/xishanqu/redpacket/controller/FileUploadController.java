@@ -24,7 +24,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/admin/file")
 @Slf4j
-public class FileUploadController{
+public class FileUploadController {
 
     @Autowired
     private MailService mailService;
@@ -35,28 +35,29 @@ public class FileUploadController{
     private ImageServer imageServer;
 
 
-
     /**
      * 文件上传
+     *
      * @Param
      * @Return
      * @Author BaoNing
      * @Time 2019/07/22
      */
     @PostMapping("/fast")
-    public String fastDFSUpload(@RequestParam(value = "fastFile") MultipartFile file) throws Exception{
+    public String fastDFSUpload(@RequestParam(value = "fastFile") MultipartFile file) throws Exception {
         FastDFSClient fastDFSClient = new FastDFSClient("classpath:client.conf");
         String fileId = fastDFSClient.fastDFSUpload(file);
-        return imageServer.getImageServerUrl() + ":" + imageServer.getImageServerPort()+ "/" + fileId;
+        return imageServer.getImageServerUrl() + ":" + imageServer.getImageServerPort() + "/" + fileId;
     }
 
 
     /**
      * 发送附件文件
+     *
      * @param multipartFile
      */
     @PostMapping("/mail")
-    public void sendAttachMail(@RequestParam(value = "upFile") MultipartFile multipartFile){
+    public void sendAttachMail(@RequestParam(value = "upFile") MultipartFile multipartFile) {
 
         //TODO 待转化
         //发送邮件
@@ -68,7 +69,7 @@ public class FileUploadController{
                     mailInfo.getSubject(),
                     mailInfo.getContent(),
                     multipartFile);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             log.info("发送邮件失败>>>>>>>>>>ex={}", ex);
         }
     }
@@ -76,17 +77,18 @@ public class FileUploadController{
 
     /**
      * file upload
+     *
      * @param uploadFile
      * @param request
      * @return
      */
     @PostMapping("/upload")
-    public String upload(@RequestParam(value="uploadFile",required=false)MultipartFile uploadFile, HttpServletRequest request){
+    public String upload(@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, HttpServletRequest request) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String realPath = request.getSession().getServletContext().getRealPath("/uploadFile/");
         String format = sdf.format(new Date());
         File folder = new File(realPath + format);
-        if (!folder.isDirectory()){
+        if (!folder.isDirectory()) {
             folder.mkdirs();
         }
         String oldName = uploadFile.getOriginalFilename();
@@ -95,7 +97,7 @@ public class FileUploadController{
             uploadFile.transferTo(new File(folder, newName));
             String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/uploadFile/" + format + newName;
             return filePath;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "upload error!";

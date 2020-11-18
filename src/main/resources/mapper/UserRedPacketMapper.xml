@@ -3,10 +3,11 @@
 <mapper namespace="com.xishanqu.redpacket.mapper.UserRedPacketMapper">
 
 
-  <insert id="grabRedPacket" useGeneratedKeys="true" keyProperty="id" parameterType="com.xishanqu.redpacket.pojo.UserRedPacket">
-      insert into t_user_red_packet(red_packet_id, user_id, amount, grab_time, note)
+    <insert id="grabRedPacket" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.xishanqu.redpacket.pojo.UserRedPacket">
+        insert into t_user_red_packet(red_packet_id, user_id, amount, grab_time, note)
         values (#{redPacketId}, #{userId}, #{amount}, #{grabTime}, #{note})
-  </insert>
+    </insert>
 
 
 </mapper>

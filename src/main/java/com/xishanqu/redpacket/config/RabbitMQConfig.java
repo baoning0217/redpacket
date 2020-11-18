@@ -25,17 +25,17 @@ public class RabbitMQConfig {
 
 
     @Bean
-    public TopicExchange topicExchange(){
+    public TopicExchange topicExchange() {
         return new TopicExchange(rabbitmqTopicName, true, false);
     }
 
     @Bean
-    public Queue redPacket(){
+    public Queue redPacket() {
         return new Queue(rabbitmqQueueName);
     }
 
     @Bean
-    public Binding redPacketBinding(){
+    public Binding redPacketBinding() {
         return BindingBuilder.bind(redPacket()).to(topicExchange()).with(rabbitmqRoutingKeyName);
     }
 

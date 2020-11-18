@@ -18,7 +18,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public ModelAndView uploadException(MaxUploadSizeExceededException e) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("msg","上传文件大小超出限制");
+        modelAndView.addObject("msg", "上传文件大小超出限制");
         modelAndView.setViewName("error");
         return modelAndView;
     }

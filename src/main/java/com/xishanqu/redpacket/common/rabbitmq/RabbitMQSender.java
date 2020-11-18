@@ -21,22 +21,23 @@ public class RabbitMQSender {
 
     /**
      * RabbitTemplate
+     *
      * @param rabbitTemplate rabbitmq模版类
      */
     @Autowired
-    public RabbitMQSender(RabbitTemplate rabbitTemplate){
+    public RabbitMQSender(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
     /**
      * 发送消息
+     *
      * @param messages
      */
-    public void send(String messages){
+    public void send(String messages) {
         log.info("发送RabbitMQ消息队列>>>>>>>>>>>>>>>>>>>>message={}", messages);
         this.rabbitTemplate.convertAndSend(RabbitMqConstant.QUEUE, messages);
     }
-
 
 
 }

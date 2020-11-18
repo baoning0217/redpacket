@@ -35,14 +35,14 @@ public class RedisRedPacketService {
      * 开启新线程运行
      */
     @Async
-    public void saveUserRedPackByRedis(Long redPacketId, Double unitAmount){
+    public void saveUserRedPackByRedis(Long redPacketId, Double unitAmount) {
         System.err.println("开始保存数据");
         Long start = System.currentTimeMillis();
         //获取列表操作对象
         BoundListOperations ops = redisTemplate.boundListOps(REDIS_PREFIX + redPacketId);
         Long size = ops.size();
 
-        Long times = size % TIME_SIZE == 0 ? size / TIME_SIZE : size / TIME_SIZE + 1 ;
+        Long times = size % TIME_SIZE == 0 ? size / TIME_SIZE : size / TIME_SIZE + 1;
 
         int count = 0;
         List<UserRedPacket> userRedPacketList = new ArrayList<UserRedPacket>(TIME_SIZE);
@@ -85,12 +85,13 @@ public class RedisRedPacketService {
 
     /**
      * 使用批量处理Redis缓存数据.
+     *
      * @param userRedPacketList
      * @return 抢红包插入数量.
      */
     private int executeBatch(List<UserRedPacket> userRedPacketList) {
         int count = 0;
-        for (UserRedPacket userRedPacket : userRedPacketList){
+        for (UserRedPacket userRedPacket : userRedPacketList) {
             int i = userRedPacketMapper.grabRedPacket(userRedPacket);
             count = count + i;
         }

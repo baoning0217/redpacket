@@ -17,37 +17,37 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileImage {
-	
-	@Id
-	private String id;
-	/**
-	 * 文件名称
-	 */
-	private String name;
-	/**
-	 * 文件类型
-	 */
-	private String contentType;
-	private long size;
-	private Date uploadDate;
-	private String md5;
-	/**
-	 * 文件内容
-	 */
-	private Binary content;
-	/**
-	 * 文件路径
-	 */
-	private String path;
+
+    @Id
+    private String id;
+    /**
+     * 文件名称
+     */
+    private String name;
+    /**
+     * 文件类型
+     */
+    private String contentType;
+    private long size;
+    private Date uploadDate;
+    private String md5;
+    /**
+     * 文件内容
+     */
+    private Binary content;
+    /**
+     * 文件路径
+     */
+    private String path;
 
 
-	public FileImage(String name, String contentType, long size, Binary content) {
-		this.name = name;
-		this.contentType = contentType;
-		this.size = size;
-		this.uploadDate = new Date();
-		this.content = content;
-	}
-	
+    public FileImage(String name, String contentType, long size, Binary content) {
+        this.name = name;
+        this.contentType = contentType;
+        this.size = size;
+        this.uploadDate = new Date();
+        this.content = content;
+    }
+
 
 }

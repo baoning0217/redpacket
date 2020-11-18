@@ -8,11 +8,11 @@ public interface UserRedPacketMapper {
 
     /**
      * 插入抢红包信息
+     *
      * @param userRedPacket
      * @return
      */
     int grabRedPacket(UserRedPacket userRedPacket);
-
 
 
 }

@@ -2,6 +2,7 @@ package com.xishanqu.redpacket.config;
 
 /**
  * 添加全局数据
+ *
  * @Author BaoNing 2019/7/11
  */
 //@ControllerAdvice

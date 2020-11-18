@@ -12,14 +12,14 @@ import java.util.concurrent.Executors;
  */
 public class RedissonLockTest {
 
-    public static final int fixNum =5;
+    public static final int fixNum = 5;
 
     public static void main(String[] args) throws Exception {
         CountDownLatch latch = new CountDownLatch(fixNum);
         RedissonClient redissonClient = Redisson.create();
         ExecutorService exec = Executors.newFixedThreadPool(fixNum);
 
-        for (int i = 0; i< fixNum; i++){
+        for (int i = 0; i < fixNum; i++) {
             exec.submit(new TestLock("client-" + i, redissonClient, latch));
         }
 

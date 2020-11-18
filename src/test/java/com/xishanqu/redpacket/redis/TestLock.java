@@ -15,20 +15,20 @@ import java.util.concurrent.TimeUnit;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TestLock implements Runnable{
+public class TestLock implements Runnable {
 
     private String name;
     private RedissonClient redissonClient;
     private CountDownLatch latch;
 
-    public void run(){
+    public void run() {
         //定义锁
         RLock lock = redissonClient.getLock("TestLock");
         //Redisson的分布式可重入锁RLock
         try {
             System.out.println("----------" + this.name + "------------等待获取锁-------------");
             //获取锁
-            if (lock.tryLock(300, 30, TimeUnit.MILLISECONDS)){
+            if (lock.tryLock(300, 30, TimeUnit.MILLISECONDS)) {
                 //尝试加锁，最多等待300毫秒，上锁后30毫秒自动解锁
                 try {
                     System.out.println("-----------" + this.name + "-----获得锁，开始处理---------");
@@ -36,13 +36,13 @@ public class TestLock implements Runnable{
                     Thread.sleep(5 * 1000);
                     System.out.println("------------" + this.name + "-----------锁使用完毕------------");
                     latch.countDown();
-                }finally {
+                } finally {
                     //释放锁
                     lock.unlock();
                     System.out.println("------------" + this.name + "-----释放锁------------");
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

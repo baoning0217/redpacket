@@ -10,7 +10,8 @@
     </resultMap>
 
     <!--新增-->
-    <insert id="insert" parameterType="com.xishanqu.redpacket.common.vo.ImageVo" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.xishanqu.redpacket.common.vo.ImageVo" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO t_image
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -35,7 +36,6 @@
             </if>
         </trim>
     </insert>
-
 
 
 </mapper>

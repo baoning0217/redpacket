@@ -24,7 +24,7 @@ public class RedissonService {
     private RedisTemplate redisTemplate;
 
 
-    public RedPacket reduceRedPacket(Long redPacketId){
+    public RedPacket reduceRedPacket(Long redPacketId) {
         //加锁的key
         String key = RedisConstant.Red_Packet + redPacketId + "";
         //获取锁
@@ -33,8 +33,8 @@ public class RedissonService {
         rLock.lock(60, TimeUnit.SECONDS);
 
         //业务逻辑
-        RedPacket redPacket = (RedPacket)redisTemplate.opsForValue().get(key);
-        if (redPacket.getStock() > 0){
+        RedPacket redPacket = (RedPacket) redisTemplate.opsForValue().get(key);
+        if (redPacket.getStock() > 0) {
             redPacket.setStock(redPacket.getStock() - 1);
         }
         redisTemplate.opsForValue().set(RedisConstant.Red_Packet + redPacket.getId() + "", redPacket);
